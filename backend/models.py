@@ -4,7 +4,7 @@ Google style docstrings.
 Created on 09.09.23
 
 @author: Sahin Ogur
-@company:  docmetric GmbH
+
 """
 
 from database import Base, local_engine, local_session
