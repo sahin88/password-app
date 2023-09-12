@@ -1,0 +1,11 @@
+fastapi
+pydantic
+uvicorn
+watchfiles
+sqlalchemy
+psycopg2-binary
+asyncpg
+ormar
+sqlalchemy_utils
+pysqlite3
+

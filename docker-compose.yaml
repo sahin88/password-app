@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: sh -c "uvicorn main:app --reload --port=8000 --host=0.0.0.0"
+    volumes:
+      - ./backend:/app
+    environment:
+      - DATABASE_URL=postgresql://fastapi_traefik:fastapi_traefik@postgres_db_vol:5432/fastapi_traefik
+    restart: always
+    ports:
+      - "127.0.0.1:8000:8000"
+    expose:
+      - 8000
+    depends_on:
+      - postgres_db_vol
+
+  react-app:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+
+  postgres_db_vol:
+    image: postgres:latest
+    container_name: postgres_db_container
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./dbdata_:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_USER: fastapi_traefik
+      POSTGRES_PASSWORD: fastapi_traefik
+      POSTGRES_DB: fastapi_traefik
+
+
+
+
+

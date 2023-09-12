@@ -1,0 +1,17 @@
+*.log
+*.bak
+*.swp
+*.pyc
+
+/.env
+/.env.local
+/.env.*.local
+/.vscode
+/.DS_Store
+/node_modules
+/build
+/.idea
+./backend/package.json
+./backend/passwords.db
+./backend/package-lock.json
+./frontend/password_app/node_modules/

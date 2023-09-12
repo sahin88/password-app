@@ -1,0 +1,60 @@
+.tag-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+.label-container {
+  width: 20%;
+  margin: 10px;
+}
+
+h3.panel-label {
+  background-color: #ea5b5b;
+  color: #fff;
+  margin: 0;
+  padding: 10px 15px 10px;
+}
+
+.plus {
+  box-shadow: none;
+  background-color: #fff;
+  border: 1px solid #aaa;
+  margin-left: 5px;
+}
+
+.label-container.icebox {
+  width: 100%;
+}
+
+.drop-area {
+  min-height: 600px;
+  padding: 5px;
+  border: 1px solid #aaa;
+}
+
+.drop-area p {
+  margin: 5px;
+  padding: 5px;
+  background-color: #ececec;
+}
+
+.label-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+textarea.label {
+  margin: 5px;
+  padding: 5px;
+  background-color: #ececec;
+  /* background-color: transparent; */
+  width: 100%;
+  border-box: 15px;
+  box-sizing: border-box;
+  border: 0;
+}
+
+i {
+  bottom: 15px;
+  right: 15px;
+  position: absolute;
+}
