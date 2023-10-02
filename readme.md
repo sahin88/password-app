@@ -17,6 +17,7 @@ The purpose of this script saving password in sqlite db
 - Compose docker file from ./fast_api directory
 
       docker-compose up --build 
+-  Image 
 
 
 ### Licence 

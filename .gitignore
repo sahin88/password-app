@@ -14,4 +14,4 @@
 ./backend/package.json
 ./backend/passwords.db
 ./backend/package-lock.json
-./frontend/password_app/node_modules/
+./frontend/node_modules

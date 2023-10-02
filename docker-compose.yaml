@@ -12,6 +12,8 @@ services:
     restart: always
     ports:
       - "127.0.0.1:8000:8000"
+    networks:
+      - backend
     expose:
       - 8000
     depends_on:
@@ -23,18 +25,32 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
+    networks:
+      - frontend
+      - backend
 
   postgres_db_vol:
-    image: postgres:latest
+    image: postgres:14.2
     container_name: postgres_db_container
     ports:
       - "5432:5432"
+    expose:
+      - 5432
+    networks:
+      - backend
     volumes:
-      - ./dbdata_:/var/lib/postgresql/data/
+      - postgres-data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: fastapi_traefik
       POSTGRES_PASSWORD: fastapi_traefik
       POSTGRES_DB: fastapi_traefik
+
+volumes:
+  postgres-data:
+
+networks:
+  backend:
+  frontend:
 
 
 

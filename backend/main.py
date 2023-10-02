@@ -39,17 +39,19 @@ class PasswordsBase(BaseModel):
     password: str
 
 
-class NotesdsBase(BaseModel):
+class NotesBase(BaseModel):
     title: str
     description: str
-    finished_at:Optional[str]
+    finished_at: Optional[str]
     status: models.ItemStatusEnum
     started_at: str
 
 
-class NotesModel(NotesdsBase):
-
+class NotesModel(NotesBase):
     class Config:
+        def __init__(self):
+            pass
+
         from_attributes = True
 
 
@@ -63,6 +65,9 @@ class PasswordModel(PasswordsBase):
     eyeSlash: bool = True
 
     class Config:
+        def __init__(self):
+            pass
+
         from_attributes = True
 
 
@@ -81,6 +86,7 @@ models.Base.metadata.create_all(bind=local_engine)
 
 @app.post("/passwords/", response_model=PasswordModel, status_code=201)
 async def create_passwords(transaction: PasswordsBase, session: _local_session):
+    print("createeeeeee...............", transaction.model_dump())
     password_object_instance = models.Passwords(**transaction.model_dump())
     session.add(password_object_instance)
     session.commit()
@@ -104,7 +110,7 @@ async def delete_item(session: _local_session, item_id: int):
 
 
 @app.post("/tickets/", response_model=NotesModel, status_code=201)
-async def create_notes(transaction: NotesdsBase, session: _local_session):
+async def create_notes(transaction: NotesBase, session: _local_session):
     notes_object_instance = models.Notes(**transaction.model_dump())
     session.add(notes_object_instance)
     session.commit()
