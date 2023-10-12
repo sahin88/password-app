@@ -1,7 +1,7 @@
 # Password app
 
 
-The purpose of this script saving password in sqlite db
+The purpose of this script saving password in postgresql
 
 ### Prerequisites
  

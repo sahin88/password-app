@@ -8,7 +8,7 @@
 /.env.*.local
 /.vscode
 /.DS_Store
-/node_modules
+
 /build
 /.idea
 ./backend/package.json
