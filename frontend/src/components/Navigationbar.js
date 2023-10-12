@@ -12,11 +12,6 @@ function Navbar() {
                            <Link style={{ color: 'white', textDecoration: 'None' }} to="/passwords">PASSWORDS</Link>
                        </div>
 
-                       <div className="ml-auto m-lg-3 mt-2" >
-                           <Link style={{ color: 'white', textDecoration: 'None' }} to="/notes">NOTES</Link>
-                       </div>
-
-
                    </form>
                </div>
            </nav>

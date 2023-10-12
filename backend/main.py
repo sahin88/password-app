@@ -13,8 +13,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
-
-import models
+import models_
 from database import local_session, local_engine
 
 app = FastAPI()
@@ -43,7 +42,7 @@ class NotesBase(BaseModel):
     title: str
     description: str
     finished_at: Optional[str]
-    status: models.ItemStatusEnum
+    status: models_.ItemStatusEnum
     started_at: str
 
 
@@ -81,13 +80,12 @@ def get_local_session():
 
 _local_session = Annotated[Session, Depends(get_local_session)]
 
-models.Base.metadata.create_all(bind=local_engine)
+models_.Base.metadata.create_all(bind=local_engine)
 
 
 @app.post("/passwords/", response_model=PasswordModel, status_code=201)
 async def create_passwords(transaction: PasswordsBase, session: _local_session):
-    print("createeeeeee...............", transaction.model_dump())
-    password_object_instance = models.Passwords(**transaction.model_dump())
+    password_object_instance = models_.Passwords(**transaction.model_dump())
     session.add(password_object_instance)
     session.commit()
     session.refresh(password_object_instance)
@@ -97,12 +95,12 @@ async def create_passwords(transaction: PasswordsBase, session: _local_session):
 @app.get("/passwords/", response_model=List[PasswordModel], status_code=200)
 async def get_passwords(session: _local_session, skip: int = 0, limit: int = 100):
     """Gest passwords """
-    return session.query(models.Passwords).offset(skip).limit(limit).all()
+    return session.query(models_.Passwords).offset(skip).limit(limit).all()
 
 
 @app.delete("/passwords/{item_id}", status_code=204)
 async def delete_item(session: _local_session, item_id: int):
-    password = session.query(models.Passwords).filter(models.Passwords.id == item_id).first()
+    password = session.query(models_.Passwords).filter(models_.Passwords.id == item_id).first()
     if password is None:
         raise HTTPException(status_code=404, detail="Item not found")
     session.delete(password)
@@ -111,7 +109,7 @@ async def delete_item(session: _local_session, item_id: int):
 
 @app.post("/tickets/", response_model=NotesModel, status_code=201)
 async def create_notes(transaction: NotesBase, session: _local_session):
-    notes_object_instance = models.Notes(**transaction.model_dump())
+    notes_object_instance = models_.Notes(**transaction.model_dump())
     session.add(notes_object_instance)
     session.commit()
     session.refresh(notes_object_instance)
@@ -121,12 +119,12 @@ async def create_notes(transaction: NotesBase, session: _local_session):
 @app.get("/tickets/", response_model=List[NotesModel], status_code=200)
 async def get_passwords(session: _local_session, skip: int = 0, limit: int = 100):
     """Gets tickers from backend """
-    return session.query(models.Notes).offset(skip).limit(limit).all()
+    return session.query(models_.Notes).offset(skip).limit(limit).all()
 
 
 @app.delete("/tickets/{item_id}", status_code=204)
 async def delete_note_item(session: _local_session, item_id: int):
-    notes = session.query(models.Notes).filter(models.Notes.id == item_id).first()
+    notes = session.query(models_.Notes).filter(models_.Notes.id == item_id).first()
     if notes is None:
         raise HTTPException(status_code=404, detail="Item not found")
     session.delete(notes)

@@ -1,5 +1,5 @@
 fastapi
-pydantic==2.3.0
+pydantic
 uvicorn
 watchfiles
 sqlalchemy
@@ -8,4 +8,6 @@ asyncpg
 ormar
 sqlalchemy_utils
 pysqlite3
+pydantic-settings
+
 

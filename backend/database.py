@@ -13,7 +13,13 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy_utils import create_database, database_exists
 from config import settings
 from db_settings import DATABASE_USER, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_PORT, DATABASE_NAME
+import os
+from dotenv import load_dotenv
 
+# Load environment variables from .env file
+load_dotenv()
+
+database_url = os.getenv("DATABASE_URL")
 
 def _create_engine(user, password, host, port, dbname):
     """Creates engine
@@ -29,10 +35,10 @@ def _create_engine(user, password, host, port, dbname):
     #url = f"postgresql://{user}:{password}@{host}:{port}/{dbname}"
     #url = f"sqlite:///passwords.db"
 
-    if not database_exists(settings.db_url):
-        create_database(settings.db_url)
+    if not database_exists(database_url):
+        create_database(database_url)
 
-    return create_engine(settings.db_url, pool_size=500, echo=True)
+    return create_engine(database_url, pool_size=500, echo=True)
     #return create_engine(url,  connect_args={'check_same_thread': False})
 
 
