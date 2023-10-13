@@ -81,7 +81,13 @@ function Home(){
     }
     const  handleSubmit = async (event) => {
         event.preventDefault();
-        await api.post('/passwords/', formData);
+        try {
+            await api.post('/passwords/', formData);
+        } catch (err) {
+             alert(`While saving the following error has occurred: ${err}`)
+        }
+
+
         getPasswords();
         setFormData(
             {
